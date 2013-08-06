@@ -15,6 +15,8 @@
 #define ESCAPE 27
 
 /* The number of our GLUT window */
+GLfloat rtri;
+GLfloat rquad;
 int window; 
 
 /* A general OpenGL initialization function.  Sets all of the initial parameters. */
@@ -56,7 +58,7 @@ void DrawGLScene()
   glLoadIdentity();				// Reset The View
 
   glTranslatef(-1.5f,0.0f,-6.0f);		// Move Left 1.5 Units And Into The Screen 6.0
-	
+  glRotatef(rtri,0.0f,1.0f,0.0f);	
   // draw a triangle
   glBegin(GL_POLYGON);				// start drawing a polygon
  
@@ -81,53 +83,63 @@ void DrawGLScene()
   glColor3f(0.0f,1.0f,0.0f);
   glVertex3f(-1.0f,-1.0f,-1.0f);
 
+  glColor3f(1.0f,0.0f,0.0f);
+  glVertex3f(0.0f,1.0f,0.0f);
+  glColor3f(0.0f,0.0f,1.0f);
+  glVertex3f(-1.0f,-1.0f,-1.0f);  
+  glColor3f(0.0f,1.0f,0.0f);
+  glVertex3f(-1.0f,-1.0f,1.0f); 
+
   glEnd();					// we're done with the polygon
 
 
   glTranslatef(3.0f,0.0f,0.0f);		        // Move Right 3 Units
+  glRotatef(rquad,1.0f,1.0f,1.0f);
 	
   // draw a square (quadrilateral)
   glBegin(GL_QUADS);				// start drawing a polygon (4 sided)
   
   glColor3f(0.5f,0.5f,0.1f);
-  glVertex3f(-1.0f, 1.0f, 0.0f);		// Top Left
+  glVertex3f(1.0f, 1.0f, -1.0f);		// Top Left
+  glVertex3f( -1.0f, 1.0f, -1.0f);		// Top Right
+  glVertex3f( -1.0f, 1.0f, 1.0f);		// Bottom Right
+  glVertex3f(1.0f,1.0f, 1.0f);		// Bottom Left	
+ 
+  glColor3f(0.0f,1.0f,0.0f);
+  glVertex3f(1.0f, -1.0f, 1.0f);		// Top Left
+  glVertex3f( -1.0f, -1.0f, 1.0f);		// Top Right
+  glVertex3f( -1.0f,-1.0f, -1.0f);		// Bottom Right
+  glVertex3f( 1.0f,-1.0f, -1.0f);		// Bottom Left	
+
+  glColor3f(0.0f,0.0f,1.0f);
+  glVertex3f(1.0f, 1.0f, 1.0f);		// Top Left
+  glVertex3f( -1.0f, 1.0f, 1.0f);		// Top Right
+  glVertex3f( -1.0f,-1.0f, 1.0f);		// Bottom Right
+  glVertex3f(1.0f,-1.0f, 1.0f);		// Bottom Left	
+
+  glColor3f(0.5f,0.5f,0.1f);
+  glVertex3f(1.0f, -1.0f,-1.0f);		// Top Left
+  glVertex3f( -1.0f, -1.0f, -1.0f);		// Top Right
+  glVertex3f( -1.0f,1.0f, -1.0f);		// Bottom Right
+  glVertex3f(1.0f,1.0f,-1.0f);		// Bottom Left	
+
+  glColor3f(0.1f,0.5f,0.1f);
+  glVertex3f(-1.0f, 1.0f, 1.0f);		// Top Left
+  glVertex3f( -1.0f, 1.0f, -1.0f);		// Top Right
+  glVertex3f( -1.0f,-1.0f, -1.0f);		// Bottom Right
+  glVertex3f(-1.0f,-1.0f, 1.0f);		// Bottom Left	
+
+  glColor3f(0.5f,0.0f,0.1f);
+  glVertex3f(1.0f, 1.0f, -1.0f);		// Top Left
   glVertex3f( 1.0f, 1.0f, 1.0f);		// Top Right
   glVertex3f( 1.0f,-1.0f, 1.0f);		// Bottom Right
-  glVertex3f(-1.0f,-1.0f, 0.0f);		// Bottom Left	
- 
-/*  glColor3f(0.0f,1.0f,0.0f);
-  glVertex3f(1.0f, 1.0f, 0.0f);		// Top Left
-  glVertex3f( 1.0f, 1.0f, -1.0f);		// Top Right
-  glVertex3f( 1.0f,-1.0f, -1.0f);		// Bottom Right
-  glVertex3f( 1.0f,1.0f, 0.0f);		// Bottom Left	
+  glVertex3f(1.0f,-1.0f, -1.0f);		// Bottom Left	
 
-  glColor3f(0.5f,0.5f,0.1f);
-  glVertex3f(-1.0f, 1.0f, 0.0f);		// Top Left
-  glVertex3f( 1.0f, 1.0f, 0.0f);		// Top Right
-  glVertex3f( 1.0f,-1.0f, 0.0f);		// Bottom Right
-  glVertex3f(-1.0f,-1.0f, 0.0f);		// Bottom Left	
-   
-  glColor3f(0.5f,0.5f,0.1f);
-  glVertex3f(-1.0f, 1.0f, 0.0f);		// Top Left
-  glVertex3f( 1.0f, 1.0f, 0.0f);		// Top Right
-  glVertex3f( 1.0f,-1.0f, 0.0f);		// Bottom Right
-  glVertex3f(-1.0f,-1.0f, 0.0f);		// Bottom Left	
-
-  glColor3f(0.5f,0.5f,0.1f);
-  glVertex3f(-1.0f, 1.0f, 0.0f);		// Top Left
-  glVertex3f( 1.0f, 1.0f, 0.0f);		// Top Right
-  glVertex3f( 1.0f,-1.0f, 0.0f);		// Bottom Right
-  glVertex3f(-1.0f,-1.0f, 0.0f);		// Bottom Left	
-
-  glColor3f(0.5f,0.5f,0.1f);
-  glVertex3f(-1.0f, 1.0f, 0.0f);		// Top Left
-  glVertex3f( 1.0f, 1.0f, 0.0f);		// Top Right
-  glVertex3f( 1.0f,-1.0f, 0.0f);		// Bottom Right
-  glVertex3f(-1.0f,-1.0f, 0.0f);		// Bottom Left	
-*/
   glEnd();					// done with the polygon
   // swap buffers to display, since we're double buffered.
   glutSwapBuffers();
+  rtri+=0.2f;
+  rquad-=0.15f;
 }
 
 /* The function called whenever a key is pressed. */
